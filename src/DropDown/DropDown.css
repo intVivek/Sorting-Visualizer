@@ -1,0 +1,27 @@
+
+.dropDown {
+  width: 120px;height:100%;
+  outline: none;
+  border-radius: 7px;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size:14px;
+  font-weight:700;
+  border:none;
+  background-color: #FF7F50;
+  cursor: pointer;
+  transition-duration: 0.5s;
+}
+.dropDown:hover{
+  color: #37ffff;
+  transition-duration: 0.5s;
+}
+option{
+  height:10px;
+  background-color: #FF7F50;
+}
+option:hover{
+  background-color: #00ff40;
+}

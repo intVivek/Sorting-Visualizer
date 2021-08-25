@@ -4,15 +4,18 @@ import BubbleSort from './Algorithms/BubbleSort.js';
 import SelectionSort from './Algorithms/SelectionSort.js';
 import InsertionSort from './Algorithms/InsertionSort.js';
 import MergeSort from './Algorithms/MergeSort.js';
+import QuickSort from './Algorithms/QuickSort.js';
 import DropDown from './DropDown/DropDown.js';
 
 function App() {
   const [block,setBlock]= useState([]);
+  const [initBlock,setInitBlock]= useState([]);
   const [sortingParams,setSortingParams] = useState({});
   const [numberOfBlocks,setNumberOfBlocks] = useState(100);
   const [algorithm,setAlgorithm] = useState('Bubble Sort');
   const [speed,setSpeed] = useState(50);
   const [visualizing,setVisualizing] = useState(false);
+
 
   const stopTimeout=()=> {
     var id = setTimeout(()=>{}, 0)
@@ -26,12 +29,9 @@ function App() {
     algorithm==="Bubble Sort"?BubbleSort(block,setBlock,speed,sortingParams,setSortingParams):
     algorithm==="Selection Sort"?SelectionSort(block,setBlock,speed,sortingParams,setSortingParams):
     algorithm==="Insertion Sort"?InsertionSort(block,setBlock,speed,sortingParams,setSortingParams):
-    algorithm==="Merge Sort"?MergeSort(block,setBlock,speed,sortingParams,setSortingParams):console.log(algorithm);
+    algorithm==="Merge Sort"?MergeSort(initBlock,setBlock,speed,sortingParams,setSortingParams):
+    algorithm==="Quick Sort"?QuickSort(initBlock,setBlock,speed,sortingParams,setSortingParams):console.log(algorithm);
   }
-
-  useEffect(()=>{
-    console.log(sortingParams);
-  },[sortingParams]);
 
   useEffect(()=>{
     randomize();
@@ -49,10 +49,10 @@ function App() {
     stopTimeout();
     setVisualizing(false);
     setBlock(Array(numberOfBlocks).fill().map(() => (Math.random())));
+    setInitBlock(block);
   }
 
   const clickHandler=()=>{
-    console.log(sortingParams);
     if(visualizing){
       stopTimeout();
       setVisualizing(false);
@@ -62,7 +62,7 @@ function App() {
     }
   }
 
-  const tray=block.map((element,i)=>{
+  const tray=block&&block.map((element,i)=>{
     let color=i===(sortingParams.orange)?"#FF7F50":i===sortingParams.purple?"purple":"#00c2c2";
     let blockStyle = {
       width:"calc(100%/"+numberOfBlocks+" - "+30/numberOfBlocks+"%)",

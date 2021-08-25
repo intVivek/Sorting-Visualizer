@@ -1,12 +1,8 @@
-const swap = (arr, i, j) => {
-  const temp = arr[i]
-  arr[i] = arr[j]
-  arr[j] = temp
-}
-
 function MergeSort(block,setBlock,speed,sortingParams,setSortingParams){
-  var t=0;
-  const dupBlocks = block.slice()
+  var dupBlocks,t=0;
+  var allBlocks=[];
+  dupBlocks=block.slice(0);
+  console.log(sortingParams.j,dupBlocks);
   function merge(arr, l, m, r)
   {
       var n1 = m - l + 1;
@@ -20,7 +16,6 @@ function MergeSort(block,setBlock,speed,sortingParams,setSortingParams){
       var i = 0;
       var j = 0;
       var k = l;
-   
       while (i < n1 && j < n2) {
           if (L[i] <= R[j]) {
               arr[k] = L[i];
@@ -30,50 +25,21 @@ function MergeSort(block,setBlock,speed,sortingParams,setSortingParams){
               arr[k] = R[j];
               j++;
           }
-          setTimeout((a,b,c,d)=>{
-            setSortingParams(prev=>{
-              prev.i=b
-              prev.j=c
-              prev.orange=c;
-              prev.purple=c;
-              return prev;
-            })
-            setBlock(a);
-          },t*1000/speed,dupBlocks.slice(0),i,j);
-          t++;  
+          allBlocks[t]=dupBlocks.slice(0);
+          t++;
           k++;
       }
       while (i < n1) {
           arr[k] = L[i];
-          setTimeout((a,b,c,d)=>{
-            setSortingParams(prev=>{
-              prev.i=b
-              prev.j=c
-              prev.orange=c;
-              prev.purple=c;
-              return prev;
-            })
-            setBlock(a);
-          },t*1000/speed,dupBlocks.slice(0),i,j);
-  
-          t++;  
+          allBlocks[t]=dupBlocks.slice(0);
+          t++;
           i++;
           k++;
       }
       while (j < n2) {
           arr[k] = R[j];
-          setTimeout((a,b,c,d)=>{
-            setSortingParams(prev=>{
-              prev.i=b
-              prev.j=c
-              prev.orange=c;
-              prev.purple=c;
-              return prev;
-            })
-            setBlock(a);
-          },t*1000/speed,dupBlocks.slice(0),i,j);
-  
-          t++;  
+          allBlocks[t]=dupBlocks.slice(0);
+          t++;
           j++;
           k++;
       }
@@ -88,6 +54,19 @@ function MergeSort(block,setBlock,speed,sortingParams,setSortingParams){
       merge(arr,l,m,r);
   }
   mergeSort(dupBlocks,0, dupBlocks.length-1);
+  var time=0;
+  for(var i=sortingParams.i;i<allBlocks.length;i++){
+      setTimeout((a)=>{
+        setSortingParams(prev=>{
+            prev.i=a
+            prev.orange=-1;
+            prev.purple=-1;
+            return prev
+          })
+        setBlock(allBlocks[a]);
+      },time*1000/speed,i);
+      time++;
+  }
 }
 
  export default MergeSort;

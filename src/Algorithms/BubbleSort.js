@@ -18,7 +18,7 @@ function bubbleSort(block,setBlock,speed,sortingParams,setSortingParams){
           setSortingParams(prev=>{
             prev.i=b
             prev.j=c
-            prev.orange=d;
+            prev.orange=d+1;
             prev.purple=d;
             return prev
           })

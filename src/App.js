@@ -35,6 +35,7 @@ function App() {
 
   useEffect(()=>{
     randomize();
+    // eslint-disable-next-line
   },[numberOfBlocks]);
 
   useEffect(()=>{
@@ -42,6 +43,7 @@ function App() {
       stopTimeout();
       setTimeout(startVisualize,0);
     }
+    // eslint-disable-next-line
   },[speed]);
 
   const randomize=()=>{

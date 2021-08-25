@@ -13,8 +13,8 @@ function MergeSort(block,setBlock,speed,sortingParams,setSortingParams){
           L[i] = arr[l + i];
       for (var j = 0; j < n2; j++)
           R[j] = arr[m + 1 + j];
-      var i = 0;
-      var j = 0;
+      i = 0;
+      j = 0;
       var k = l;
       while (i < n1 && j < n2) {
           if (L[i] <= R[j]) {
